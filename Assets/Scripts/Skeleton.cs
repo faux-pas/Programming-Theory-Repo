@@ -23,12 +23,18 @@ public class Skeleton : Enemy
         if (!inAttackRange)
         {
             MoveTowardsPlayer();
+            Walk();
         }
 
         if (inAttackRange && !isAttacking)
         {
             Attack();
         }
+    }
+
+    private void Walk()
+    {
+        animator.SetFloat("speedv", 1);
     }
 
 }

@@ -20,8 +20,18 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        LookAtPlayer();
+        MoveTowardsPlayer();
+    }
+
+    protected void LookAtPlayer()
+    {
         transform.LookAt(player.transform);
-        //Vector3 playerPos = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-        //enemyRB.transform.Translate(playerPos * speed * Time.deltaTime);        
+    }
+
+    protected void MoveTowardsPlayer()
+    {
+        enemyRB.transform.position = Vector3.MoveTowards(enemyRB.transform.position,
+            player.transform.position, speed);
     }
 }

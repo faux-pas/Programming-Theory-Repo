@@ -4,29 +4,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Rigidbody enemyRB;
-    GameObject player;
+    protected Rigidbody enemyRB;
+    protected GameObject player;
+    protected Animator animator;
 
     [SerializeField]protected float speed;
     protected int health;
     protected int abilityCharges;
     protected bool inAttackRange = false;
+    protected bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
     {
         enemyRB = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        LookAtPlayer();
-
-        if (!inAttackRange)
-        {
-            MoveTowardsPlayer();
-        }
     }
 
     protected void LookAtPlayer()

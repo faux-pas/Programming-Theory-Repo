@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]protected float speed;
     protected int health;
     protected int abilityCharges;
+    protected bool inAttackRange = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,11 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         LookAtPlayer();
-        MoveTowardsPlayer();
+
+        if (!inAttackRange)
+        {
+            MoveTowardsPlayer();
+        }
     }
 
     protected void LookAtPlayer()
@@ -32,6 +37,22 @@ public class Enemy : MonoBehaviour
     protected void MoveTowardsPlayer()
     {
         enemyRB.transform.position = Vector3.MoveTowards(enemyRB.transform.position,
-            player.transform.position, speed);
+            new Vector3(player.transform.position.x, 0, player.transform.position.z), speed);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("playerMeleeRange"))
+        {
+            inAttackRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("playerMeleeRange"))
+        {
+            inAttackRange = false;
+        }
     }
 }

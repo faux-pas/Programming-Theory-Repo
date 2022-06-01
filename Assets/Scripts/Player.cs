@@ -87,4 +87,5 @@ public class Player : MonoBehaviour
         moveY = 0f;
         moveX = 0f;
     }
+
 }

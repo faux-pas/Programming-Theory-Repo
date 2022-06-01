@@ -4,37 +4,10 @@ using UnityEngine;
 
 public class Skeleton : Enemy
 {
-    private void Attack()
-    {    
-        animator.SetBool("Attack1h1", true);
-        isAttacking = true;
-    }
-
-    private void EndAttack()
+    private void Awake()
     {
-        isAttacking = false;
-        animator.SetBool("Attack1h1", false);
+        attack = "Attack1h1";
+        speed = 0.05f;
+        Health = 2;
     }
-
-    private void FixedUpdate()
-    {
-        LookAtPlayer();
-
-        if (!inAttackRange)
-        {
-            MoveTowardsPlayer();
-            Walk();
-        }
-
-        if (inAttackRange && !isAttacking)
-        {
-            Attack();
-        }
-    }
-
-    private void Walk()
-    {
-        animator.SetFloat("speedv", 1);
-    }
-
 }

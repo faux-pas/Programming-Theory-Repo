@@ -29,6 +29,12 @@ public class Enemy : MonoBehaviour
             {
                 health += value;
             }
+            
+            if(value < 0)
+            {
+                Debug.Log($"{gameObject.name} took {value} damage and now has {health} health.");
+            }
+            
         }        
     }
     // Start is called before the first frame update
@@ -56,6 +62,12 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("playerMeleeRange"))
         {
             inAttackRange = true;
+        }
+
+        if (other.CompareTag("playerArrow"))
+        {
+            Health = -1;
+            Destroy(other.gameObject);
         }
     }
 

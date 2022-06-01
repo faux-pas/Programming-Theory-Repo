@@ -6,6 +6,8 @@ TagManager:
   tags:
   - playerMeleeRange
   - enemyWeapon
+  - playerArrow
+  - enemy
   layers:
   - Default
   - TransparentFX

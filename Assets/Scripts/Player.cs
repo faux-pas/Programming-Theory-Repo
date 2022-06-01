@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     Animator animator;
 
+    private int health;
     public float walkSpeed;
     public float runSpeed;
     public float moveSpeed;
@@ -14,11 +15,33 @@ public class Player : MonoBehaviour
 
     float horizontal;
     float vertical;
-    
+
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            if ((health + value) < 0)
+            {
+                health = 0;
+            }
+            else
+            {
+                health += value;
+            }
+
+            if (value < 0)
+            {
+                Debug.Log($"{gameObject.name} took {value} damage and now has {health} health.");
+            }
+
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        Health = 10;
     }
 
     // Update is called once per frame
@@ -26,6 +49,29 @@ public class Player : MonoBehaviour
     {
         Move();
         
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("MouseDown");
+            FireBow();
+        }
+    }
+
+    private void FireBow()
+    {
+        animator.SetTrigger("FireBow");
+    }
+
+    public void TriggerFireArrow()
+    {
+        GameObject arrowSpawner = GameObject.Find("arrowSpawner");
+        var projectile = arrowSpawner.GetComponent<LaunchArrow>();
+        //Debug.Log("Should Trigger Arrow");
+        projectile.FireArrow();
+
     }
 
     private void Move()

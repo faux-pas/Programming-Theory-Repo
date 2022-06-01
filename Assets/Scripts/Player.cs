@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     Animator animator;
 
+    private bool isAlive = true;
     private int health;
     public float walkSpeed;
     public float runSpeed;
@@ -32,7 +33,14 @@ public class Player : MonoBehaviour
 
             if (value < 0)
             {
+                animator.SetBool("Hit", true);
                 Debug.Log($"{gameObject.name} took {value} damage and now has {health} health.");
+            }
+
+            if (health == 0)
+            {
+                animator.SetBool("Death", true);
+                isAlive = false;
             }
 
         }
@@ -47,6 +55,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!isAlive)
+        {
+            return;
+        }
         Move();
         
     }

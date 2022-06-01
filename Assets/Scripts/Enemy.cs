@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     protected int abilityCharges;
     protected bool inAttackRange = false;
     protected bool isAttacking = false;
+    protected bool isAlive = true;
     protected string attack;
 
     private int health = 0;
@@ -32,7 +33,14 @@ public class Enemy : MonoBehaviour
             
             if(value < 0)
             {
+                animator.SetBool("Hit1", true);
                 Debug.Log($"{gameObject.name} took {value} damage and now has {health} health.");
+            }
+
+            if(health == 0)
+            {
+                animator.SetBool("Fall1", true);
+                isAlive = false;
             }
             
         }        
@@ -93,6 +101,10 @@ public class Enemy : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        if (!isAlive)
+        {
+            return;
+        }
 
         if (!inAttackRange && !isAttacking)
         {

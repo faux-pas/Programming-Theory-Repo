@@ -45,6 +45,10 @@ public class Enemy : MonoBehaviour
             
         }        
     }
+    protected void Die()
+    {
+        Destroy(gameObject);
+    }
     // Start is called before the first frame update
     void Start()
     {

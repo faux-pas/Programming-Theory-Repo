@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     public float mousexSensitivity;
     public float mouseySensitivity;
 
+
     private void Start()
     {
         player = transform.parent;
